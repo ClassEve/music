@@ -50,11 +50,11 @@
               title: key,
               items: []
             }
-            map[key].items.push(new Singer({
-              id: item.Fsinger_mid,
-              name: item.Fsinger_name
-            }))
           }
+          map[key].items.push(new Singer({
+            id: item.Fsinger_mid,
+            name: item.Fsinger_name
+          }))
         })
 
         // 为了得到有序列表，处理map
