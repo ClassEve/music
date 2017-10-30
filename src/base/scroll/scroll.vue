@@ -17,13 +17,13 @@
         type: Boolean,
         default: true
       },
+      listenScroll: {
+        type: Boolean,
+        default: false
+      },
       data: {
         type: Array,
         default: null
-      },
-      listenScroll: { // 是否监听滚动事件
-        type: Boolean,
-        default: false
       }
     },
     mounted() {
@@ -36,24 +36,23 @@
         if (!this.$refs.wrapper) {
           return
         }
-
         this.scroll = new BScroll(this.$refs.wrapper, {
-          probeType: this.probeType,
+          probeType: this.probeType,    // 实时派发scroll事件
           click: this.click
         })
 
         if (this.listenScroll) {
-//          let me = this
-          this.scroll.on('scroll', pos => {
-            this.$emit('scroll', pos)
+          let me = this
+          this.scroll.on('scroll', (pos) => {
+            me.$emit('scroll', pos)
           })
         }
       },
-      enable() {
-        this.scroll && this.scroll.enable()
-      },
       disable() {
         this.scroll && this.scroll.disable()
+      },
+      enable() {
+        this.scroll && this.scroll.enable()
       },
       refresh() {
         this.scroll && this.scroll.refresh()
@@ -76,5 +75,5 @@
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-  @import "~common/stylus/variable"
+
 </style>
