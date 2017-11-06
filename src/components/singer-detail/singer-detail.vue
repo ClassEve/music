@@ -5,8 +5,50 @@
 </template>
 
 <script type="text/ecmascript-6">
-  export default {
+  import {mapGetters} from 'vuex'
+  import {getSingerDetail} from 'api/singer'
+  import {ERR_OK} from 'api/config'
+  import {createSong} from 'common/js/song'
 
+  export default {
+    data() {
+      return {
+        song: []
+      }
+    },
+    created() {
+      this._getDetail()
+      console.log(this.singer)
+    },
+    methods: {
+      _getDetail() {
+        if (!this.singer.id) {
+          this.$router.push('/singer')
+          return
+        }
+        getSingerDetail(this.singer.id).then(res => {
+          if (res.code === ERR_OK) {
+            this.songs = this._nomalizeSongs(res.data.list)
+            console.log(this.songs)
+          }
+        })
+      },
+      _nomalizeSongs(list) {
+        let ret = []
+        list.forEach(item => {
+          let {musicData} = item
+          if (musicData.songid && musicData.albumid) {
+            ret.push(createSong(musicData))
+          }
+        })
+        return ret
+      }
+    },
+    computed: {
+      ...mapGetters([
+        'singer'
+      ])
+    }
   }
 </script>
 
@@ -15,15 +57,16 @@
 
   .singer-detail
     position: fixed
-    z-index :100
+    z-index: 100
     top: 0
     left: 0
     right 0
     bottom 0
     background $color-background
 
-  .slider-enter-active,.slider-leave-active
+  .slider-enter-active, .slider-leave-active
     transition all 0.3s
-  .slider-enter,.slider-leave-to
-    transform translate3d(100%, 0 , 0)
+
+  .slider-enter, .slider-leave-to
+    transform translate3d(100%, 0, 0)
 </style>
