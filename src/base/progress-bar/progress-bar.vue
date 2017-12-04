@@ -32,7 +32,6 @@
     methods: {
       progressClick(e) {
         this._offset(e.offsetX)
-        console.log(e.offsetX)
         this._triggerPercent()
       },
       progressTouchStart(e) {
