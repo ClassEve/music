@@ -7,6 +7,11 @@ import 'common/stylus/index.styl'
 import VueLazyload from 'vue-lazyload'
 import store from './store'
 
+/* eslint-disable no-unused-vars */
+import vConsole from 'vconsole'
+
+console.log(111111111111111)
+
 fastclick.attach(document.body)
 
 Vue.use(VueLazyload, {
@@ -19,5 +24,5 @@ new Vue({
   router,
   store,
   template: '<App/>',
-  components: { App }
+  components: {App}
 })
