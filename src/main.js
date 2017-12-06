@@ -8,9 +8,7 @@ import VueLazyload from 'vue-lazyload'
 import store from './store'
 
 /* eslint-disable no-unused-vars */
-import vConsole from 'vconsole'
-
-console.log(111111111111111)
+// import vConsole from 'vconsole'
 
 fastclick.attach(document.body)
 
